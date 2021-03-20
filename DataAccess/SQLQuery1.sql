@@ -1,7 +1,8 @@
-﻿﻿CREATE TABLE Cars (
+﻿CREATE TABLE Cars (
     Id int NOT NULL,
     BrandId int NOT NULL,
     ColorId int NOT NULL,
+    CarName varchar(255) NOT NULL,
     ModelYear varchar(255) NOT NULL,
     DailyPrice decimal(18) NOT NULL,
     Description varchar(255) NOT NULL,
