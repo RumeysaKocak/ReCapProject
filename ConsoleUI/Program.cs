@@ -3,6 +3,10 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.InMemory;
 using Entities.Concrete;
 using System;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.Threading.Channels;
+
 
 namespace ConsoleUI
 {
@@ -31,12 +35,31 @@ namespace ConsoleUI
             //BrandDeleteTest();
             //BrandUpdateTest();
 
+            //RentalStatusAddMethod();
+
+
+        }
+        private static void RentalStatusAddMethod()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            var result = rentalManager.Add(new Rental() { Id = 8, CustomerId = 3, RentDate = new DateTime(2021, 03, 12), ReturnDate = new DateTime(2021, 03, 15) });
+
+            if (result.Success)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
 
         }
 
         private static void BrandUpdateTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            BrandManager brandManager = new BrandManager(new EfCustomerDal());
             var result = brandManager.Update(new Brand { BrandId = 5, BrandName = "Mercedes" });
             if (result.Success)
             {
@@ -46,7 +69,7 @@ namespace ConsoleUI
 
         private static void BrandDeleteTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            BrandManager brandManager = new BrandManager(new EfCustomerDal());
             var result = brandManager.Delete(new Brand { BrandId = 3 });
             if (result.Success)
             {
@@ -56,7 +79,7 @@ namespace ConsoleUI
 
         private static void BrandAddTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            BrandManager brandManager = new BrandManager(new EfCustomerDal());
             var result = brandManager.Add(new Brand() { BrandName = "Cadillac" });
             if (result.Success)
             {
@@ -66,13 +89,13 @@ namespace ConsoleUI
 
         private static void BrandGetByIdTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            BrandManager brandManager = new BrandManager(new EfCustomerDal());
             Console.WriteLine(brandManager.GetById(2).Data.BrandId + " " + brandManager.GetById(2).Data.BrandName);
         }
 
         private static void BrandGetAllTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            BrandManager brandManager = new BrandManager(new EfCustomerDal());
             var result = brandManager.GetAll();
             if (result.Success)
             {

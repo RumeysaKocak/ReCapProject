@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,16 @@ namespace Business.Concrete
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
+        private EfCustomerDal efCustomerDal;
+
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
+        }
+
+        public BrandManager(EfCustomerDal efCustomerDal)
+        {
+            this.efCustomerDal = efCustomerDal;
         }
 
         public IDataResult<List<Brand>> GetAll()
